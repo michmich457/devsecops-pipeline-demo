@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test DevSecOps</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ceci est un test !</h1>
+  <p>Appuie sur le bouton pour vérifier que tout fonctionne</p>
+
+  <button onclick="check()">Vérifier</button>
+
+  <p id="result"></p>
+
+  <script>
+    function check() {
+      document.getElementById("result").textContent = "Tout fonctionne !";
+    }
+  </script>
+
+</body>
+</html>
