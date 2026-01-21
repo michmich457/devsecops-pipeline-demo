@@ -28,3 +28,27 @@ jobs:
           vuln-type: 'os,library'
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
+
+  snyk_container_scan:
+    name: Snyk scan (container)
+    runs-on: ubuntu-latest
+
+    # Le job ne tourne que si le secret existe
+    if: ${{ secrets.SNYK_TOKEN != '' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build docker image
+        run: docker build -t devsecops-demo:${{ github.sha }} .
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Snyk container test (fail on high)
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          snyk auth "${SNYK_TOKEN}"
+          snyk container test devsecops-demo:${{ github.sha }} --severity-threshold=high
